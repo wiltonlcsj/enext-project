@@ -104,20 +104,27 @@ class FileHelper {
 
     let newGame = new Game(1);
     readline.eachLine(gamelog, line => {
+      // Verify if is a end of game
       if (line.includes('ShutdownGame')) {
         const prevGame = newGame;
         const content = this.readFromFileSync();
         prevGame.id = (content as Game[]).length + 1;
         (content as Game[]).push(prevGame);
+        // Write on JSON the ended game
         this.writeOnFileSync(content as Game[]);
         newGame = new Game(prevGame.id);
       } else if (line.includes('Kill:')) {
+        // If the line contains a kill
         const killline = line.trim().split(':')[3].trim();
+
+        // Desestruturate to get the names of killers, killed and mode
         const [killer, killed, mod] = killline.split(/killed | by/gm);
 
+        // Checks the exists of players
         const newKiller = newGame.checkPlayerExists(killer.trim());
         const newKilled = newGame.checkPlayerExists(killed.trim());
 
+        // Instantiate a new kill object
         newGame.newKill(newKiller, newKilled, mod.trim());
       }
     });
