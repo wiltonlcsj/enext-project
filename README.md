@@ -23,15 +23,18 @@
 - O parser é feito sequencialmente, linha a linha, basicamente fazendo verificações por nome e quebras utilizando Regex e os próprios símbolos do formato da entrada
 - Além dos casos de morte pelo `<world>`, o player também perde uma kill caso cometa suicídio
 
+### Instalação de dependências
+
+- Via NPM > `npm install`
+- Via Yarn > `yarn install`
+
 ### Passos para executar testes via NPM
 
-1. `npm install`
-2. `npm test`
+1. `npm test`
 
 ### Passos para executar testes via Yarn
 
-1. `yarn install`
-2. `yarn test`
+1. `yarn test`
 
 ### Para deixar o servidor rodando em debug com NPM
 
