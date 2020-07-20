@@ -105,7 +105,10 @@ class FileHelper {
     let newGame = new Game(1);
     readline.eachLine(gamelog, line => {
       // Verify if is a end of game
-      if (line.includes('ShutdownGame')) {
+      if (
+        line.includes('ShutdownGame') ||
+        (line.includes('InitGame') && newGame.id !== 1)
+      ) {
         const prevGame = newGame;
         const content = this.readFromFileSync();
         prevGame.id = (content as Game[]).length + 1;
@@ -127,6 +130,7 @@ class FileHelper {
         // Instantiate a new kill object
         newGame.newKill(newKiller, newKilled, mod.trim());
       }
+      // Check if player change nickname and update players game
     });
   }
 }
